@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+// const mongoURL_Local = process.env.mongoDB_URL_LOCAL
 const mongoURL = process.env.mongoDB_URL
 
 mongoose.connect(mongoURL)
