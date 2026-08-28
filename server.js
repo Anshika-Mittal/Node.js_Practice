@@ -1,3 +1,7 @@
+const logReq = (req, res, next) =>{
+    console.log(`[${new Date().toLocaleString}] request recieved at ${req.originalUrl} `)
+    next();
+}
 const express = require('express')
 require('dotenv').config();
 const port = process.env.PORT || 3000;
@@ -9,9 +13,10 @@ const db = require('./db');
 const studentRouter = require('./routes/studentRoutes')
 
 const bodyparser = require('body-parser')
+app.use(logReq);
 app.use(bodyparser.json());
 
-app.get('/',(req, res)=>{
+app.get('/', (req, res)=>{
     res.send("Hi! Caught you.")
 })
 
