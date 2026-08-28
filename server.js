@@ -1,5 +1,5 @@
 const logReq = (req, res, next) =>{
-    console.log(`[${new Date().toLocaleString}] request recieved at ${req.originalUrl} `)
+    console.log(`[${new Date().toLocaleString()}] request recieved at ${req.originalUrl} `)
     next();
 }
 const express = require('express')
