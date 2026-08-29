@@ -5,14 +5,12 @@ const logReq = (req, res, next) =>{
 const express = require('express')
 require('dotenv').config();
 const port = process.env.PORT || 3000;
-
 const app = express();
-
 const db = require('./db');
-
 const studentRouter = require('./routes/studentRoutes')
 
-const bodyparser = require('body-parser')
+const bodyparser = require('body-parser');
+const passport = require('./auth');
 app.use(logReq);
 app.use(bodyparser.json());
 
@@ -83,7 +81,10 @@ app.get('/', (req, res)=>{
 //     }
 // })
 
-app.use('/hostel', studentRouter);
+app.use(passport.initialize())
+const localAuth = passport.authenticate('local',{session:false});
+app.use('/hostel', localAuth,studentRouter);
+// app.use('/hostel',studentRouter);
 app.listen(port,()=>{
     console.log("Server listening at port ", port);
 })
